@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { GestionProduitsService } from '../shared/gestion-produits.service';
 
 @Component({
   selector: 'app-edit-produit',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditProduitComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public activeModal: NgbActiveModal,private gestionProduitsService:GestionProduitsService) {}
+  public produit:ProduitDto;
   ngOnInit() {
+    console.log(this.produit)
   }
-
+  enregistrer(){
+    
+    this.gestionProduitsService.update(this.produit).subscribe(data=>{
+      this.activeModal.close();
+    })
+   
+  }
 }

@@ -3,8 +3,9 @@ import { GestionProduitsService } from '../shared/gestion-produits.service';
 import CustomStore from 'devextreme/data/custom_store';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { formatDate } from 'devextreme/localization';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap'; 
+import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'; 
 import { AddProduitComponent } from '../add-produit/add-produit.component';
+import { EditProduitComponent } from '../edit-produit/edit-produit.component';
 @Component({
   selector: 'app-liste-produits',
   templateUrl: './liste-produits.component.html',
@@ -23,7 +24,7 @@ export class ListeProduitsComponent  {
   refreshMode: string;
  
    URL:string = "http://localhost:9002/ProduitController"
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private modalService: NgbModal) {
       this.refreshMode = "reshape";
       this.refreshModes = ["full", "reshape", "repaint"];
 
@@ -91,7 +92,12 @@ export class ListeProduitsComponent  {
     );
     
   }
-
+modifier(content){
+    console.log("modifier")
+    const modalRef =    this.modalService.open(EditProduitComponent);  
+    modalRef.componentInstance.produit=content.data;
+ 
+}
 
   sendRequest(url: string, method: string = "GET", data: any = {}): any {
       this.logRequest(method, url, data);

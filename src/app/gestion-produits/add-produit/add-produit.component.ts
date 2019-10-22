@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditProduitComponent } from '../edit-produit/edit-produit.component';
 
 @Component({
   selector: 'app-add-produit',
@@ -8,10 +9,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AddProduitComponent implements OnInit {
 
-  constructor( ) { }
+  constructor( private modalService: NgbModal) { }
+ 
 
   ngOnInit() {
   
   }
-
+  modifier(){
+    console.log("modifier")
+    const modalRef = this.modalService.open(EditProduitComponent);
+ 
+}
 }

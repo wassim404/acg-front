@@ -1,115 +1,40 @@
-<!--  <div id="data-grid-demo">
-    <dx-data-grid 
-        id="gridContainer"
-        [dataSource]="listProduit"
-        keyExpr="id"
-        [showBorders]="true"
-       >
-        
-        <dxo-paging [enabled]="false"></dxo-paging>
-        <dxo-editing 
-            mode="popup"
-            [allowAdding]="true"
-            [allowUpdating]="true"
-            [allowDeleting]="true"
-          >
-            <dxo-popup
-                 [(visible)]="isPopupEditVisible"
-                title="Employee Info"
-                [showTitle]="true"
-                [width]="700"
-                [height]="525"
-                [position]="{ my: 'top', at: 'top', of: window }"
-                [toolbarItems]="[  
-                  {  
-                  widget: 'dxButton',  
-                  location: 'after',  
-                  options: {  
-                    text: 'Save'  
-                  },  
-                  toolbar: 'bottom',  
-                  onClick: onRowUpdated  
-                }]">
-            </dxo-popup>
-            <dxo-form>
-              
-                    <dxi-item dataField="id"></dxi-item>
-                    <dxi-item dataField="description"></dxi-item>
-                    <dxi-item dataField="reference"></dxi-item>
-                    <dxi-item dataField="nom"></dxi-item>
-                    <dxi-item dataField="quantite"></dxi-item>
- 
-            </dxo-form>
-        </dxo-editing>
- 
-        <dxi-column dataField="id"></dxi-column>
-        <dxi-column dataField="description"></dxi-column>
-        <dxi-column dataField="reference" caption="Title" [width]="70"></dxi-column>
-        <dxi-column dataField="nom"></dxi-column>
-        <dxi-column dataField="quantite"></dxi-column>
-    </dx-data-grid>
-</div>
- -->
-
-
- 
-<!-- 
-<div>
- <dx-data-grid id="gridContainer"
-    [dataSource]="listProduit"
-     
+<dx-data-grid id="gridContainer"
+    [dataSource]="dataSource"
+    [columnAutoWidth]="true"
     [showBorders]="true"
-    >
-    <dxi-column type="buttons" [width]="110">
-  
-        <dxi-button
-            hint="modifier"
-            icon="edit"
-            [onClick]="onRowUpdated"></dxi-button>
-        <dxi-button hint="supprimer" icon="trash"   ></dxi-button>
-        
-    </dxi-column>
-    <dxi-column dataField="id"></dxi-column>
+    rowTemplate="rowTemplateName"
+    [remoteOperations]="true">
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager 
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="[5, 10, 20]"
+        [showInfo]="true">
+    </dxo-pager>
+ 
+    <dxi-column dataField="id" [width]="70" caption="Title"></dxi-column>
     <dxi-column dataField="description"></dxi-column>
-    <dxi-column dataField="reference" caption="Title" [width]="70"></dxi-column>
+    <dxi-column dataField="reference"></dxi-column>
     <dxi-column dataField="nom"></dxi-column>
-    <dxi-column dataField="quantite"></dxi-column>
-     
-    <tbody class=" produit dx-row" *dxTemplate="let produit of listProduit" >
+    <dxi-column dataField="quantite"  ></dxi-column>
+    <dxi-column dataField="Action"  ></dxi-column>
+ 
+
+    <tbody  *dxTemplate="let produit of 'rowTemplateName'" >
         <tr class="main-row">
-         
-            <td>{{produit.id}}</td>
-            <td>{{produit.description}}</td>
-            <td>{{produit.reference}}</td>
-            <td>{{produit.nom}}</td>
-            <td>{{produit.quantite}}</td>
-          
+ 
+            <td>{{produit.data.id}}</td>
+            <td>{{produit.data.description}}</td>
+            <td>{{produit.data.reference}}</td>
+            <td>{{produit.data.nom}}</td>
+            <td>{{produit.data.quantite}}</td>
+       <td>    <button (click)="modifier(produit)">Click me!</button>
+         </td>
         </tr>
-    
+      
     </tbody>
 </dx-data-grid>
 
- 
-
-    <dx-popup
-    class="popup"
-    [width]="300"
-    [height]="250"
-    [showTitle]="true"
-    title="Information"
-    [dragEnabled]="false"
-    [closeOnOutsideClick]="true"
-    [(visible)]="isPopupEditVisible">
-    Hello Edit
-</dx-popup>
-
-</div>
-
- 
-<button (click)="onRowUpdated()">Click me!</button> -->
-
-
-<dx-data-grid
+<!-- <dx-data-grid
     [dataSource]="dataSource"  
     [remoteOperations]="true"
     height="600"
@@ -155,4 +80,8 @@
 ​
  
 </dx-data-grid>
-​
+​ -->
+<ng-template  #content  let-modal  >
+   <app-edit-produit></app-edit-produit>
+</ng-template >
+<button (click)="modifier(content)">Click me!</button>

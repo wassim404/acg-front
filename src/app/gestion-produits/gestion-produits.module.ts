@@ -8,7 +8,8 @@ import { GestionProduitsService } from './shared/gestion-produits.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AddProduitComponent } from './add-produit/add-produit.component';
 import { EditProduitComponent } from './edit-produit/edit-produit.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListeProduitsComponent, AddProduitComponent, EditProduitComponent],
@@ -20,10 +21,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     DxButtonModule,
     DxPopupModule,
     NgbModule ,
-  
+    FormsModule
   ],
  
-
-  providers: [GestionProduitsService]
+entryComponents:[EditProduitComponent],
+  providers: [GestionProduitsService,NgbActiveModal]
+ 
 })
 export class GestionProduitsModule { }

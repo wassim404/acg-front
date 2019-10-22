@@ -1,1 +1,38 @@
-<p>edit-produit works!</p>
+
+<div class="modal-header">
+    <h4 class="modal-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <form *ngIf="produit">
+          <div class="row">
+            <div class="col">
+                <label for="formGroupExampleInput">Nom</label>
+                <input  class="form-control mb-2 mr-sm-2" type="text" placeholder="nom" [(ngModel)]="produit.nom" name="nom"/>
+            </div>
+            <div class="col">
+                <label for="formGroupExampleInput">Reference</label>
+                <input   class="form-control mb-2 mr-sm-2" type="text" placeholder="reference" [(ngModel)]="produit.reference" name="reference"/>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <label for="formGroupExampleInput">Description</label>
+                  <input  class="form-control mb-2 mr-sm-2" type="text" placeholder="description" [(ngModel)]="produit.description" name="description"/>
+              </div>
+              <div class="col">
+                  <label for="formGroupExampleInput">Quantité</label>
+                  <input  class="form-control mb-2 mr-sm-2" type="text" placeholder="quantite" [(ngModel)]="produit.quantite" name="quantite"/>
+              </div>
+            </div>
+        </form>
+
+ 
+
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-dark" (click)="enregistrer()">Enregister</button>
+  </div>
